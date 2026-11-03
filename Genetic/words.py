@@ -7,16 +7,17 @@ import string
 
 from config.config import load_config
 
+
 # Crea una lista con las palabras 
 def list_creator(parents):
     config = load_config()
     poblation = []
-
-    for _ in range(config["WORDS_FOR_GEN"]):
-        if not parents:
+    
+    if not parents:
+        for _ in range(config["WORDS_FOR_GEN"]):
             poblation.append(word_creator())
-        else:
-            poblation.append(word_genetic(parents))
+    else:
+        poblation = word_genetic(parents)
 
     return poblation
 
@@ -62,8 +63,11 @@ def word_genetic(parents):
     for _ in range(config["WORDS_FOR_GEN"] - 3):
         half1 = random.choice(parent_slices)
         half2 = random.choice(parent_slices)
+        word = half1 + half2
 
-        children.append(half1 + half2)
+        word = mutation(word)
+
+        children.append(word)
 
     return children
 
@@ -78,3 +82,17 @@ def get_slices(parents):
         parent_slices.append(i[half:])
 
     return parent_slices
+
+def mutation(word):
+    config = load_config()
+    possibilities = words_possibilities()
+
+    if random.random() <= config["MUTATION_PORCENTAGE"]:
+        position = random.randint(0, 19)
+        new_letter = random.choice(possibilities)
+        
+        word_list = list(word)
+        word_list[position] = new_letter        
+        word = "".join(word_list)
+
+    return word
