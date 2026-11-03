@@ -43,7 +43,7 @@ def words_possibilities():
     if config["MAYUS"]:
         possibilities += string.ascii_uppercase
     if config["SPACE"]:
-        possibilities += string.whitespace
+        possibilities += " "
     if config["NUM"]:
         possibilities += string.digits
     if config["SIMBOL"]:
