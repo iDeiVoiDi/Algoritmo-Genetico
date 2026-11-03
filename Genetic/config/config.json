@@ -9,5 +9,6 @@
     "WORDS_FOR_GEN": 50,
     "PARENTS_WORDS": 10,
     "MUTATION_PORCENTAGE": 0.02,
+    
     "OBJETIVE_WORD": ""
 }
